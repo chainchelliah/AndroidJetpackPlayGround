@@ -22,10 +22,6 @@ class HomeViewModel(private val useCase: HomeUseCase, private val dispatchers: A
     private val _data = MediatorLiveData<Resource<List<Home>>>()
     val data: LiveData<Resource<List<Home>>> get() = _data
 
-    private var _dataSource: LiveData<Resource<List<String>>> = MutableLiveData()
-    private val _dataValue = MediatorLiveData<Resource<List<String>>>()
-    val response: LiveData<Resource<List<String>>> get() = _dataValue
-
     fun getData() = viewModelScope.launch(dispatchers.main) {
         _data.removeSource(dataSource)
         withContext(dispatchers.io) {
@@ -33,16 +29,6 @@ class HomeViewModel(private val useCase: HomeUseCase, private val dispatchers: A
         }
         _data.addSource(dataSource) {
             _data.value = it
-        }
-    }
-
-    fun getDataAsString() = viewModelScope.launch(dispatchers.main) {
-        _dataValue.removeSource(_dataSource)
-        withContext(dispatchers.io) {
-            _dataSource = useCase.getDataAsString()
-        }
-        _dataValue.addSource(_dataSource) {
-            _dataValue.value = it
         }
     }
 }

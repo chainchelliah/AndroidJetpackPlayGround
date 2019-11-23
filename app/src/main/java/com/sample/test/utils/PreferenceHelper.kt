@@ -1,16 +1,14 @@
-package com.olam.warehouse.presentation.utils
+package com.sample.test.utils
 
 import android.content.Context
 import android.content.SharedPreferences
 
 /**
- * Created by SangiliPandian C on 15-11-2019.
+ * Created by SangiliPandian C on 22-11-2019.
  */
 object PreferenceHelper {
 
-    private const val NAME = "VegaX"
-    const val LAST_SYNCED_TIME_IN_MILLS = "last_master_sync"
-    const val ÏS_LOGGED_OUT = "logged_out"
+    private const val NAME = "Test"
     private const val MODE = Context.MODE_PRIVATE
     private lateinit var preferences: SharedPreferences
 

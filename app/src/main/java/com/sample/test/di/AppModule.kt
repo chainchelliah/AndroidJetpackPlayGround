@@ -7,7 +7,7 @@ import com.sample.test.BuildConfig.DEBUG
 import com.sample.test.utils.Constants.CONNECT_TIMEOUT
 import com.sample.test.utils.Constants.READ_TIMEOUT
 import com.sample.test.utils.network.AppDispatchers
-import com.sample.test.utils.network.interceptor.Base64DecodeInterceptor
+import com.sample.test.utils.network.interceptor.AuthInterceptor
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,7 +33,7 @@ val appmodule = module {
             })
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.MINUTES)
             .readTimeout(READ_TIMEOUT, TimeUnit.MINUTES)
-            .addInterceptor(Base64DecodeInterceptor())
+            .addInterceptor(AuthInterceptor())
         if (DEBUG) {
             clientBuilder.addNetworkInterceptor(StethoInterceptor())
         }

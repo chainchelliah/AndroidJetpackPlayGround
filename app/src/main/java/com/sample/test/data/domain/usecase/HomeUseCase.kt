@@ -8,5 +8,4 @@ import com.sample.test.data.repo.HomeRepository
 
 class HomeUseCase(private val repo: HomeRepository) {
     suspend fun getData() = repo.loadData()
-    suspend fun getDataAsString() = repo.loadDataAsString()
 }

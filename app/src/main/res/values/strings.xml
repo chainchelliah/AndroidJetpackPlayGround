@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidJetpackPlayGround</string>
+    <string name="app_name">SampleTestApp</string>
     <string name="loading">loading</string>
     <string name="network_not_available">Network not available, check your data connection</string>
     <string name="logo">logo</string>

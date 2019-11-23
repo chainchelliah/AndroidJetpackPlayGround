@@ -42,13 +42,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 
-    // ---
-
     private suspend fun fetchFromNetwork(dbResult: ResultType) {
-        Timber.d(TAG, "Fetch data from network")
         setValue(Resource.loading(dbResult)) // Dispatch latest value quickly (UX purpose)
         val apiResponse = createCall()
-        Timber.e(TAG, "Data fetched from network")
         val processRes = processResponse(apiResponse)
         saveCallResults(processRes)
         GlobalScope.launch {
@@ -66,7 +62,6 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     @MainThread
     private fun setValue(newValue: Resource<ResultType>) {
-        Timber.d(TAG, "Resource: $newValue")
         if (result.value != newValue) result.postValue(newValue)
     }
 

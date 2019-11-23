@@ -1,30 +1,25 @@
 package com.sample.test.utils
 
+import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import java.io.InputStream
+import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
+import java.util.zip.DataFormatException
 import java.util.zip.Inflater
 
 /**
  * Created by SangiliPandian C on 22-11-2019.
  */
 
-@Throws(IOException::class)
-fun InputStream.readAllBytes(): ByteArray {
-    val bufLen = 4 * 0x400 // 4KB
-    val buf = ByteArray(bufLen)
-    var readLen: Int
-    ByteArrayOutputStream().use { o ->
-        this.use { i ->
-            while (i.read(buf, 0, bufLen).also { readLen = it } != -1)
-                o.write(buf, 0, readLen)
-        }
-        return o.toByteArray()
-    }
-}
+/*
+* Decode compress algorithm code inspired from
+* https://dzone.com/articles/how-compress-and-uncompress
+*/
 
-fun decodeToString(byteArray: ByteArray): String {
+@Throws(UnsupportedEncodingException::class, DataFormatException::class)
+fun decodeToString(input: String): String {
+    val byteArray = android.util.Base64.decode(input, android.util.Base64.DEFAULT)
     val inflater = Inflater()
     inflater.setInput(byteArray)
     val os = ByteArrayOutputStream(byteArray.size)
@@ -33,7 +28,11 @@ fun decodeToString(byteArray: ByteArray): String {
         val c = inflater.inflate(buffer)
         os.write(buffer, 0, c)
     }
-    os.close()
+    try {
+        os.close()
+    } catch (e: IOException) {
+        Timber.e(e)
+    }
     val output = os.toByteArray()
     return String(output, Charset.forName("UTF-8"))
 }

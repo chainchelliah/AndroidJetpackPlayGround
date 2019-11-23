@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
 /**
- * Created by SangiliPandian C on 13-08-2019.
+ * Created by SangiliPandian C on 22-11-2019.
  */
 
 fun View.visible() {

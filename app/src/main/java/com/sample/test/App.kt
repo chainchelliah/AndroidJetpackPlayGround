@@ -4,9 +4,9 @@ import android.app.Application
 import android.content.Context
 import com.crashlytics.android.Crashlytics
 import com.facebook.stetho.Stetho
-import com.olam.warehouse.presentation.utils.PreferenceHelper
 import com.sample.test.BuildConfig.DEBUG
 import com.sample.test.di.appmodule
+import com.sample.test.utils.PreferenceHelper
 import io.fabric.sdk.android.Fabric
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
